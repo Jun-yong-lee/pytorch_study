@@ -1,10 +1,11 @@
 from turtle import down
+import argparse
+import sys
 import torch
 import torch.nn as nn
 from torchvision.datasets import MNIST
 import torchvision.transforms as transforms
-import argparse
-import sys
+from torch.utils.data.dataloader import DataLoader
 
 def parse_args():
     parser = argparse.ArgumentParser(description="MNIST")
@@ -57,7 +58,27 @@ def main():
     
     # Get MNIST Dataset
     train_dataset, eval_dataset, test_dataset = get_data()
-        
+
+    # Make DataLoader
+    train_loader = DataLoader(train_dataset,
+                              batch_size=8,
+                              num_workers=0,
+                              pin_memory=True,
+                              drop_last=True,
+                              shuffle=True)
+    eval_loader = DataLoader(eval_dataset,
+                            batch_size=1,
+                            num_workers=0,
+                            pin_memory=True,
+                            drop_last=False,
+                            shuffle=False)
+    test_loader = DataLoader(test_dataset,
+                        batch_size=1,
+                        num_workers=0,
+                        pin_memory=True,
+                        drop_last=False,
+                        shuffle=False)
+    
 if __name__ == "__main__":
     args = parse_args()
     main()
