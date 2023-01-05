@@ -83,10 +83,22 @@ def transform_numpy():
     bt = torch.from_numpy(b)
     print(bt)
     
+def concat_tensor():
+    a = torch.arange(1, 10).view(3, 3)
+    b = torch.arange(10, 19).view(3, 3)
+    c = torch.arange(19, 28).view(3, 3)
+    
+    abc = torch.cat([a, b, c], dim=0)
+    
+    print(f"input tensor : \n {a} \n {b} \n {c}")
+    print(f"concat : \n {abc}")
+    print(abc.shape)
+    
 if __name__ == "__main__":
     # make_tensor()
     # sumsub_tensor()
     # muldiv_tensor()
     # reshape_tensor()
     # access_tensor()
-    transform_numpy()
+    # transform_numpy()
+    concat_tensor()
