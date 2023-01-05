@@ -94,6 +94,17 @@ def concat_tensor():
     print(f"concat : \n {abc}")
     print(abc.shape)
     
+def stack_tensor():
+    a = torch.arange(1, 10).view(3, 3)
+    b = torch.arange(10, 19).view(3, 3)
+    c = torch.arange(19, 28).view(3, 3)
+    
+    abc = torch.stack([a, b, c], dim=0)
+    
+    print(f"input tensor : \n {a} \n {b} \n {c}")
+    print(f"stack : \n {abc}")
+    print(abc.shape)
+    
 if __name__ == "__main__":
     # make_tensor()
     # sumsub_tensor()
@@ -101,4 +112,5 @@ if __name__ == "__main__":
     # reshape_tensor()
     # access_tensor()
     # transform_numpy()
-    concat_tensor()
+    # concat_tensor()
+    stack_tensor()
