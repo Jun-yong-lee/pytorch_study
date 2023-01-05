@@ -19,5 +19,24 @@ def make_tensor():
         print(f"datatype of tensor {t.dtype}")
         print(f"device tensor is stored on {t.device}")
     
+def sumsub_tensor():
+    a = torch.tensor([3, 2])
+    b = torch.tensor([5, 3])
+    
+    print(f"input {a}, {b}")
+    
+    # sum
+    sum = a + b
+    print(f"sum : {sum}")
+    # sub
+    sub = a - b
+    print(f"sub : {sub}")
+    
+    sum_element_a = a.sum()
+    print(f"sum_element_a : {sum_element_a}")
+    
+
+
 if __name__ == "__main__":
-    make_tensor()
+    # make_tensor()
+    sumsub_tensor()
