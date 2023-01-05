@@ -105,6 +105,21 @@ def stack_tensor():
     print(f"stack : \n {abc}")
     print(abc.shape)
     
+def transpose_tensor():
+    a = torch.arange(1, 10).view(3, 3)
+    print(f"input tensor : \n {a}")
+    
+    # transpose
+    at = torch.transpose(a, 0, 1)
+    print(f"transpose : \n {at}")
+    
+    b = torch.arange(1, 25).view(4, 3, 2)
+    print(f"input b tensor : \n {b}")
+    
+    bt = torch.transpose(b, 0, 2)
+    print(f"transpose : \n {bt}")
+    print(bt.shape)
+    
 if __name__ == "__main__":
     # make_tensor()
     # sumsub_tensor()
@@ -113,4 +128,5 @@ if __name__ == "__main__":
     # access_tensor()
     # transform_numpy()
     # concat_tensor()
-    stack_tensor()
+    # stack_tensor()
+    transpose_tensor()
