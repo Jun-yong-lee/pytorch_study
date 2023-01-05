@@ -60,8 +60,21 @@ def reshape_tensor():
     bt = b.t()
     print(f"transpose \n {bt}")
     
+def access_tensor():
+    a = torch.arange(1, 13).view(4, 3)
+    print(f"input : \n {a}")
+    
+    # first col
+    print(a[:, 0])
+    # first row
+    print(a[0, :])
+    # [1, 1]
+    print(a[1, 1])
+    
+    
 if __name__ == "__main__":
     # make_tensor()
     # sumsub_tensor()
     # muldiv_tensor()
-    reshape_tensor()
+    # reshape_tensor()
+    access_tensor()
