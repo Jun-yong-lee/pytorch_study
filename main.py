@@ -1,4 +1,5 @@
 import torch
+import numpy as np
 
 # print(torch.__version__)
 
@@ -71,10 +72,21 @@ def access_tensor():
     # [1, 1]
     print(a[1, 1])
     
+def transform_numpy():
+    a = torch.arange(1, 13).view(4, 3)
+    print(f"input : \n {a}")
+    
+    a_np = a.numpy()
+    print(f"numpy : {a_np}")
+    
+    b = np.array([1, 2, 3])
+    bt = torch.from_numpy(b)
+    print(bt)
     
 if __name__ == "__main__":
     # make_tensor()
     # sumsub_tensor()
     # muldiv_tensor()
     # reshape_tensor()
-    access_tensor()
+    # access_tensor()
+    transform_numpy()
