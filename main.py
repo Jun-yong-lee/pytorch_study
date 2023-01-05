@@ -120,6 +120,10 @@ def transpose_tensor():
     print(f"transpose : \n {bt}")
     print(bt.shape)
     
+    bp = b.permute(2, 0, 1) # 0, 1, 2
+    print(f"permute : \n {bp}")
+    print(bp.shape)
+    
 if __name__ == "__main__":
     # make_tensor()
     # sumsub_tensor()
