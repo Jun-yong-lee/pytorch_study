@@ -11,7 +11,7 @@ def make_tensor():
     # double
     c = torch.tensor([3], dtype=torch.float64)
     
-    print(a, b, c)
+    # print(a, b, c)
     
     tensor_list = [a, b, c]
     
