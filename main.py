@@ -149,7 +149,7 @@ def main():
         
         for i, batch in enumerate(eval_loader):
             img = batch[0]
-            gt = batch[1]
+            gt = batch[1] # ground thruth
             
             img = img.to(device)
             
