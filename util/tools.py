@@ -12,7 +12,7 @@ def show_img(img_data, text):
     img_data = Image.fromarray(_img_data)
     draw = ImageDraw.Draw(img_data)
     
-    cx, cy = _img_data.shape[0] / 2, _img_data.shape[1] / 2
+    cx, cy = int(_img_data.shape[0] / 2), int(_img_data.shape[1] / 2)
     
     # draw text in image
     if text is not None:
