@@ -10,6 +10,7 @@ import torch.optim as optim
 
 from model.models import *
 from loss.loss import *
+from util.tools import *
 
 def parse_args():
     parser = argparse.ArgumentParser(description="MNIST")
@@ -165,7 +166,7 @@ def main():
             
     elif args.mode == "test":
         model = _model(batch=1, n_classes=10, in_channel=1, in_width=1, in_height=1)
-        checkpoint = torch.load(args,checkpoint)
+        checkpoint = torch.load(args.checkpoint)
         model.load_state_dict(checkpoint)
         model.to(device)
         model.eval() # not train()
@@ -181,6 +182,7 @@ def main():
             print(out)
             
             # show result
+            show_img(img.numpy(), out.item())
             
 if __name__ == "__main__":
     args = parse_args()
