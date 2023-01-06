@@ -35,12 +35,13 @@ def convolution():
     # print(f"X = {X}")
     # print(f"W = {W}, W.shape = {W.shape}")
     
-    L1_time = time.time
+    L1_time = time.time()
     
     for i in range(5):
         L1 = Convolution.conv(X, W)
     print(f"L1 time : {time.time() - L1_time}")
 
+    L2_time = time.time()
     for i in range(5):
         L2 = Convolution.gemm(X, W)
     print(f"L2 time : {time.time() - L2_time}")
