@@ -9,6 +9,7 @@ from torch.utils.data.dataloader import DataLoader
 import torch.optim as optim
 
 from model.models import *
+from loss.loss import *
 
 def parse_args():
     parser = argparse.ArgumentParser(description="MNIST")
@@ -95,6 +96,8 @@ def main():
         optimizer = optim.SGC(model.parameters(), lr=0.01, momentum=0.9)
         scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
         
+        criterion = get_criterion(crit='mnist_', device=device)
+        
         epoch = 15
         iter = 0
         for e in range(epoch):
@@ -107,8 +110,13 @@ def main():
                 gt = gt.to(device)
                 
                 out = model(img)
-                print(out)
+                
+                loss_val = criterion(out, gt)
+                
+                print(f"loss : {loss_val}")
     
 if __name__ == "__main__":
     args = parse_args()
     main()
+    
+# python main.py --mode train --download 1 --output_dir "./output"

@@ -12,7 +12,7 @@ class MNISTloss(nn.Module):
         return loss_val
     
 def get_criterion(crit = "mnist", device=torch.device('cpu')):
-    if crit is "mnist":
+    if crit == "mnist":
         return MNISTloss(device=device)
     else:
         print("unknown criterion")
