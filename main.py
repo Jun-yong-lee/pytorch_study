@@ -1,6 +1,6 @@
 from turtle import down
 import argparse
-import sys
+import sys, os
 import torch
 import torch.nn as nn
 from torchvision.datasets import MNIST
@@ -53,6 +53,9 @@ def get_data():
 def main():
     print(torch.__version__)
     
+    if not os.path.isdir(args.output_dir):
+        os.mkdir(args.output_dir)
+    
     if torch.cuda.is_available():
         print("gpu")
         device = torch.device("cuda")
@@ -87,7 +90,7 @@ def main():
     
     # LeNet5
 
-    if args.mode == "train":
+    if args.mode == "train": # python main.py --mode "train" --download 1 --output_dir ./output
         model = _model(batch=8, n_classes=10, in_channel=1, in_width=32, in_height=32, is_train=True)
         model.to(device)
         model.train() # trian
@@ -122,7 +125,6 @@ def main():
                 
                 if iter % 100 == 0:
                     print(f"{e} epoch {iter} iter loss : {loss_val.item()}")
-                
                 iter += 1
             
             mean_loss = total_loss / i
@@ -131,7 +133,9 @@ def main():
             print(f"->{e} epoch mean loss : {mean_loss}")
             torch.save(model.state_dict(), args.output_dir + "/model_epoch" + str(e)+".pt")
         print("Train end")
-    elif args.mode == "eval":
+        
+        
+    elif args.mode == "eval": # python main.py --mode "eval" --download 1 --output_dir ./output --checkpoint ./output/model_epoch2.pt
         model = _model(batch=1, n_classes=10, in_channel=1, in_width=32, in_height=32)
         # load trained model
         checkpoint = torch.load(args.checkpoint)
@@ -143,11 +147,42 @@ def main():
         num_eval = 0
         
         for i, batch in enumerate(eval_loader):
+            img = batch[0]
+            gt = batch[1]
             
+            img = img.to(device)
+            
+            # inference
+            out = model(img)
+            
+            out = out.cpu()
+            
+            if out == gt:
+                acc += 1
+            num_eval += 1
         
-    
+        print(f"Evaluation Score : {acc} / {num_eval}")
+            
+    elif args.mode == "test":
+        model = _model(batch=1, n_classes=10, in_channel=1, in_width=1, in_height=1)
+        checkpoint = torch.load(args,checkpoint)
+        model.load_state_dict(checkpoint)
+        model.to(device)
+        model.eval() # not train()
+        
+        for i, batch in enumerate(test_loader):
+            img = batch[0]
+            img = img.to(device)
+            
+            # inference
+            out = model(img)
+            out = out.cpu()
+            
+            print(out)
+            
+            # show result
+            
 if __name__ == "__main__":
     args = parse_args()
     main()
     
-# python main.py --mode "train" --download 1 --output_dir "./output"
