@@ -1,3 +1,6 @@
-import torch
 
-print(torch.__version__)
+def convolution():
+    print("convolution")
+
+if __name__ == "__main__":
+    convolution()
