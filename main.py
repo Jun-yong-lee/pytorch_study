@@ -136,7 +136,9 @@ def main():
         print("Train end")
         
         
-    elif args.mode == "eval": # python main.py --mode "eval" --download 1 --output_dir ./output --checkpoint ./output/model_epoch2.pt
+    elif args.mode == "eval":
+        # python main.py --mode "eval" --download 1 --output_dir ./output \ 
+        # --checkpoint ./output/model_epoch2.pt
         model = _model(batch=1, n_classes=10, in_channel=1, in_width=32, in_height=32)
         # load trained model
         checkpoint = torch.load(args.checkpoint)
@@ -165,6 +167,8 @@ def main():
         print(f"Evaluation Score : {acc} / {num_eval}")
             
     elif args.mode == "test":
+        # python main.py --mode "test" --download 1 --output_dir ./output \
+        # --checkpoint ./output/model_epoch2.pt
         model = _model(batch=1, n_classes=10, in_channel=1, in_width=1, in_height=1)
         checkpoint = torch.load(args.checkpoint)
         model.load_state_dict(checkpoint)
