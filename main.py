@@ -79,6 +79,8 @@ def main():
                         drop_last=False,
                         shuffle=False)
     
+    # LeNet5
+    
 if __name__ == "__main__":
     args = parse_args()
     main()
