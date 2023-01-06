@@ -131,7 +131,21 @@ def main():
             print(f"->{e} epoch mean loss : {mean_loss}")
             torch.save(model.state_dict(), args.output_dir + "/model_epoch" + str(e)+".pt")
         print("Train end")
+    elif args.mode == "eval":
+        model = _model(batch=1, n_classes=10, in_channel=1, in_width=32, in_height=32)
+        # load trained model
+        checkpoint = torch.load(args.checkpoint)
+        model.load_state_dict(checkpoint)
+        model.to(device)
+        model.eval() # not train()
+        
+        acc = 0
+        num_eval = 0
+        
+        for i, batch in enumerate(eval_loader):
             
+        
+    
 if __name__ == "__main__":
     args = parse_args()
     main()
