@@ -38,13 +38,30 @@ def convolution():
     L1_time = time.time()
     
     for i in range(5):
-        L1 = Convolution.conv(X, W)
+        L1 = Convolution.conv(X, W)            
     print(f"L1 time : {time.time() - L1_time}")
+    print(f"L1 : {L1}")
 
     L2_time = time.time()
     for i in range(5):
         L2 = Convolution.gemm(X, W)
     print(f"L2 time : {time.time() - L2_time}")
+    print(f"L2 : {L2}")
+    
+    torch_conv = nn.Conv2d(in_c,
+                           out_c,
+                           kernel_size=k_h,
+                           stride=1,
+                           padding=0,
+                           bias=False,
+                           dtype=torch.float32)
+    torch_conv.weight = torch.nn.Parameter(torch.tensor(W))
+    
+    L3_time = time.time()
+    for i in range(5):
+        L3 = torch_conv(torch.tensor(X, requires_grad=False, dtype=torch.float32))
+    print(f"L3 time : {time.time() - L3_time}")
+    print(f"L3 : {L3}")
 
 if __name__ == "__main__":
     convolution()
