@@ -14,7 +14,7 @@ from loss.loss import *
 def parse_args():
     parser = argparse.ArgumentParser(description="MNIST")
     parser.add_argument('--mode', dest='mode', help="train / eval / test",
-                        default=False, type=bool)
+                        default=False, type=str)
     parser.add_argument('--download', dest='download', help="download MNIST dataset",
                         default=False, type=bool)
     parser.add_argument('--output_dir', dest='output_dir', help="output directory",
@@ -86,7 +86,7 @@ def main():
     _model = get_model('lenet5')
     
     # LeNet5
-    
+
     if args.mode == "train":
         model = _model(batch=8, n_classes=10, in_channel=1, in_width=32, in_height=32, is_train=True)
         model.to(device)

@@ -14,7 +14,7 @@ class Lenet5(nn.Module):
         # convolution output : [(W - K + 2P)/S] + 1
         
         # [(32 - 5 + 2*0) / 1] + 1 = 28
-        self.conv0 = nn.Con2d(self.in_channel, 6, kernel_size=5, stride=1, padding=0)
+        self.conv0 = nn.Conv2d(self.in_channel, 6, kernel_size=5, stride=1, padding=0)
         self.pool0 = nn.AvgPool2d(2, stride=2)
         self.conv1 = nn.Conv2d(6, 16, kernel_size=5, stride=1, padding=0)
         self.pool1 = nn.AvgPool2d(2, stride=2)
@@ -32,6 +32,7 @@ class Lenet5(nn.Module):
         # x = nn.functional.avg_pool2d(x, kernel_size=2, stride=2)
         x = self.conv1(x)
         x = torch.tanh(x)
+        print(x.shape)
         x = self.pool1(x)
         # x = nn.functional.avg_pool2d(x, kernel_size=2, stride=2)
         x = self.conv2(x)
