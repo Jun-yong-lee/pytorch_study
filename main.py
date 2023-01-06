@@ -93,16 +93,16 @@ def main():
         model.train() # trian
         
         # optimizer & scheduler
-        optimizer = optim.SGC(model.parameters(), lr=0.01, momentum=0.9)
+        optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
         scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
         
-        criterion = get_criterion(crit='mnist_', device=device)
+        criterion = get_criterion(crit='mnist', device=device)
         
         epoch = 15
         iter = 0
         for e in range(epoch):
             total_loss = 0
-            for i, batch in enumerate(train_dataset):
+            for i, batch in enumerate(train_loader):
                 img = batch[0]
                 gt = batch[1]
                 
@@ -113,7 +113,8 @@ def main():
                 
                 loss_val = criterion(out, gt)
                 
-                print(f"loss : {loss_val}")
+                # print(f"loss : {loss_val}")
+                print("loss : {}".format(loss_val))
     
 if __name__ == "__main__":
     args = parse_args()
