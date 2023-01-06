@@ -17,7 +17,7 @@ def convolution():
     W = np.array(np.random.standard_normal([out_c, in_c, k_h, k_w]), dtype=np.float32)
     
     print(f"X = {X}")
-    print(f"W = {W}")
+    print(f"W = {W}, W.shape = {W.shape}")
 
 if __name__ == "__main__":
     convolution()
