@@ -32,7 +32,6 @@ class Lenet5(nn.Module):
         # x = nn.functional.avg_pool2d(x, kernel_size=2, stride=2)
         x = self.conv1(x)
         x = torch.tanh(x)
-        print(x.shape)
         x = self.pool1(x)
         # x = nn.functional.avg_pool2d(x, kernel_size=2, stride=2)
         x = self.conv2(x)
