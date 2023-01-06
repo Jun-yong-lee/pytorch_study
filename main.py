@@ -6,6 +6,9 @@ import torch.nn as nn
 from torchvision.datasets import MNIST
 import torchvision.transforms as transforms
 from torch.utils.data.dataloader import DataLoader
+import torch.optim as optim
+
+from model.models import *
 
 def parse_args():
     parser = argparse.ArgumentParser(description="MNIST")
@@ -79,7 +82,32 @@ def main():
                         drop_last=False,
                         shuffle=False)
     
+    _model = get_model('lenet5')
+    
     # LeNet5
+    
+    if args.mode == "train":
+        model = _model(batch=8, n_classes=10, in_channel=1, in_width=32, in_height=32, is_train=True)
+        model.to(device)
+        model.train() # trian
+        
+        # optimizer & scheduler
+        optimizer = optim.SGC(model.parameters(), lr=0.01, momentum=0.9)
+        scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
+        
+        epoch = 15
+        iter = 0
+        for e in range(epoch):
+            total_loss = 0
+            for i, batch in enumerate(train_dataset):
+                img = batch[0]
+                gt = batch[1]
+                
+                img = img.to(device)
+                gt = gt.to(device)
+                
+                out = model(img)
+                print(out)
     
 if __name__ == "__main__":
     args = parse_args()

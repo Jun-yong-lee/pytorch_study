@@ -15,10 +15,9 @@ class Lenet5(nn.Module):
         
         # [(32 - 5 + 2*0) / 1] + 1 = 28
         self.conv0 = nn.Con2d(self.in_channel, 6, kernel_size=5, stride=1, padding=0)
-        # self.pool1 =
-        
+        self.pool0 = nn.AvgPool2d(2, stride=2)
         self.conv1 = nn.Conv2d(6, 16, kernel_size=5, stride=1, padding=0)
-        
+        self.pool1 = nn.AvgPool2d(2, stride=2)
         self.conv2 = nn.Conv2d(16, 120, kernel_size=5, stride=1, padding=0)
         
         # fully-connected layer
@@ -29,10 +28,12 @@ class Lenet5(nn.Module):
         # x' shape : [B, C, H, W]
         x = self.conv0(x)
         x = torch.tanh(x)
-        x = nn.functional.avg_pool2d(x, kernel_size=2, stride=2)
+        x = self.pool0(x)
+        # x = nn.functional.avg_pool2d(x, kernel_size=2, stride=2)
         x = self.conv1(x)
         x = torch.tanh(x)
-        x = nn.functional.avg_pool2d(x, kernel_size=2, stride=2)
+        x = self.pool1(x)
+        # x = nn.functional.avg_pool2d(x, kernel_size=2, stride=2)
         x = self.conv2(x)
         x = torch.tanh(x)
         # change format from 4dim -> 2dim ( [B, C, H, W] -> [B, C*H*W] )
