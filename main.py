@@ -35,7 +35,5 @@ def convolution():
     print(f"L1 shape : {L1.shape}")
     print(f"L1 : {L1}")
     
-
-
 if __name__ == "__main__":
     convolution()
