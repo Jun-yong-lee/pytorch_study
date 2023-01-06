@@ -32,7 +32,7 @@ class Conv:
                         # one pixel of output shape
                         a_j = oh * self.stride - self.pad
                         for kh in range(self.k_h):
-                            if self.check_out(a_j, self.in_h) == False:
+                            if self.check_range(a_j, self.in_h) == False:
                                 C[b, oc, oh, ow] += 0
                             else:
                                 a_i = ow * self.stride - self.pad
