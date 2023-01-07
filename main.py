@@ -2,9 +2,11 @@ import numpy as np
 import time
 import torch
 import torch.nn as nn
+import matplotlib.pyplot as plt
 
 from function.convolution import Conv
 from function.pool import Pool
+from function.activation import *
 
 def convolution():
     print("convolution")
@@ -122,7 +124,30 @@ def forward_net():
     
     print("L2 shape : ", L2.shape)
     print(L2)
+    
+def plot_activation():
+    """_summary_
+    Plot the activation output of [-10,10] inputs
+    activations : relu, leaky_relu, sigmoid, tanh
+    """    
+    x = np.arange(-10,10,1)
+    
+    out_relu = relu(x)
+    out_leaky = leaky_relu(x)
+    out_sigmoid = sigmoid(x)
+    out_tanh = tanh(x)
+
+    #print(out_relu, out_leaky, out_sigmoid, out_tanh)
+    
+    plt.plot(x, out_relu, 'r', label='relu')
+    plt.plot(x, out_leaky, 'b', label='leaky')
+    plt.plot(x, out_sigmoid, 'g', label='sigmoid')
+    plt.plot(x, out_tanh, 'bs', label='tanh')
+    plt.ylim([-2,2])
+    plt.legend()
+    plt.show()
 
 if __name__ == "__main__":
     # convolution()
-    forward_net()
+    # forward_net()
+    plot_activation()
