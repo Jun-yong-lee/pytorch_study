@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 
 from function.convolution import Conv
 from function.pool import Pool
+from function.fc import FC
 from function.activation import *
 
 def convolution():
@@ -129,7 +130,7 @@ def plot_activation():
     """_summary_
     Plot the activation output of [-10,10] inputs
     activations : relu, leaky_relu, sigmoid, tanh
-    """    
+    """
     x = np.arange(-10,10,1)
     
     out_relu = relu(x)
