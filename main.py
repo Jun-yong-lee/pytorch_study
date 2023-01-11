@@ -2,7 +2,7 @@ import argparse
 import sys, os
 import torch
 import torch.nn as nn
-from torchvision.datasets import MNIST, FashionMNIST
+from torchvision.datasets import FashionMNIST
 import torchvision.transforms as transforms
 from torch.utils.data.dataloader import DataLoader
 import torch.optim as optim
@@ -12,7 +12,7 @@ from loss.loss import *
 from util.tools import *
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="MNIST")
+    parser = argparse.ArgumentParser(description="FashionMNIST")
     parser.add_argument('--mode', dest='mode', help="train / eval / test",
                         default=False, type=str)
     parser.add_argument('--download', dest='download', help="download MNIST dataset",
@@ -96,7 +96,7 @@ def main():
         model.train() # trian
         
         # optimizer & scheduler
-        optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9, weight_decay=0.1)
+        optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9) #  weight_decay=0.1 -> error reason
         scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
         
         criterion = get_criterion(crit='mnist', device=device)
