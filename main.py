@@ -128,6 +128,8 @@ def main():
                 
                 if iter % 100 == 0:
                     print(f"{e} epoch {iter} iter loss : {loss_val.item()}")
+                    loss_list += [loss_val.item()]
+                    iter_list += [iter]
                 iter += 1
             
             mean_loss = total_loss / i
