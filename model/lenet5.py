@@ -33,11 +33,11 @@ class Lenet5(nn.Module):
         self.dropout = nn.Dropout(p=0.1)
         
         # weight initialization
-        # torch.nn.init.xavier_uniform_(self.conv0.weight)
-        # torch.nn.init.xavier_uniform_(self.conv1.weight)
-        # torch.nn.init.xavier_uniform_(self.conv2.weight)
-        # torch.nn.init.xavier_uniform_(self.fc3.weight)
-        # torch.nn.init.xavier_uniform_(self.fc4.weight)
+        torch.nn.init.xavier_uniform_(self.conv0.weight)
+        torch.nn.init.xavier_uniform_(self.conv1.weight)
+        torch.nn.init.xavier_uniform_(self.conv2.weight)
+        torch.nn.init.xavier_uniform_(self.fc3.weight)
+        torch.nn.init.xavier_uniform_(self.fc4.weight)
         
     def forward(self, x):
         # x' shape : [B, C, H, W]

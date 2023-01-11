@@ -101,7 +101,10 @@ def main():
         
         criterion = get_criterion(crit='mnist', device=device)
         
-        epoch = 5
+        loss_list = []
+        iter_list = []
+        
+        epoch = 20
         iter = 0
         for e in range(epoch):
             total_loss = 0
@@ -132,8 +135,10 @@ def main():
             
             print(f"->{e} epoch mean loss : {mean_loss}")
             torch.save(model.state_dict(), args.output_dir + "/model_epoch" + str(e)+".pt")
+        plt.clf()
+        plt.plot(iter_list, loss_list, 'b', label='loss')
+        plt.savefig('loss.jpg')
         print("Train end")
-        
         
     elif args.mode == "eval":
         # python main.py --mode "eval" --download 1 --output_dir ./output --checkpoint ./output/model_epoch4.pt
