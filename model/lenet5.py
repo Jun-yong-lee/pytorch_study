@@ -56,7 +56,7 @@ class Lenet5(nn.Module):
         x = torch.flatten(x, start_dim=1)
         x = self.fc3(x)
         # x = self.dropout(x)
-        x = self.tanh(x)
+        x = torch.tanh(x)
         x = self.fc4(x)
         x = x.view(self.batch, -1)
         x = nn.functional.softmax(x, dim=1)
