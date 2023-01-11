@@ -24,19 +24,40 @@ class Lenet5(nn.Module):
         self.fc3 = nn.Linear(120, 84)
         self.fc4 = nn.Linear(84, self.n_classes)
         
+        self.leakyrelu = nn.LeakyReLU(0.1)
+        
+        # batchnorm
+        self.bn0 = nn.BatchNorm2d(6)
+        self.bn1 = nn.BatchNorm2d(16)
+        self.bn2 = nn.BatchNorm2d(120)
+        
+        # dropout
+        self.dropout = nn.Dropout(p=0.1)
+        
+        # weight initialization
+        torch.nn.init.xavier_uniform_(self.conv0.weight)
+        torch.nn.init.xavier_uniform_(self.conv1.weight)
+        torch.nn.init.xavier_uniform_(self.conv2.weight)
+        torch.nn.init.xavier_uniform_(self.fc3.weight)
+        torch.nn.init.xavier_uniform_(self.fc4.weight)
+        
     def forward(self, x):
         # x' shape : [B, C, H, W]
         x = self.conv0(x)
+        x = self.bn0(x)
         x = torch.tanh(x)
         x = self.pool0(x)
         x = self.conv1(x)
+        x = self.bn1(x)
         x = torch.tanh(x)
         x = self.pool1(x)
         x = self.conv2(x)
+        x = self.bn2(x)
         x = torch.tanh(x)
         # change format from 4dim -> 2dim ( [B, C, H, W] -> [B, C*H*W] )
         x = torch.flatten(x, start_dim=1)
         x = self.fc3(x)
+        x = self.dropout(x)
         x = torch.tanh(x)
         x = self.fc4(x)
         x = x.view(self.batch, -1)

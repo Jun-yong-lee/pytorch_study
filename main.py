@@ -112,12 +112,12 @@ def main():
         model.train() # trian
         
         # optimizer & scheduler
-        optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
+        optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9, weight_decay=0.1)
         scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
         
         criterion = get_criterion(crit='mnist', device=device)
         
-        epoch = 15
+        epoch = 5
         iter = 0
         for e in range(epoch):
             total_loss = 0
