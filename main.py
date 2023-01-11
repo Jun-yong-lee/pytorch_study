@@ -28,40 +28,25 @@ def parse_args():
     args = parser.parse_args()
     return args
 
-def get_data(name = "MNIST"):
+def get_data():
     my_transform = transforms.Compose([
         transforms.Resize([32, 32]),
         transforms.ToTensor(),
         transforms.Normalize((0.5,), (1.0,))
     ])
-    if name == "MNIST":
-        download_root = "./mnist_dataset"
-        train_dataset = MNIST(root=download_root,
-                            transform=my_transform,
-                            train=True,
-                            download=args.download)
-        eval_dataset = MNIST(root=download_root,
-                            transform=my_transform,
-                            train=False,
-                            download=args.download)
-        test_dataset = MNIST(root=download_root,
-                            transform=my_transform,
-                            train=False,
-                            download=args.download)
-    elif name == "FASHION_MNIST":
-        download_root = "./fashonmnist_dataset"
-        train_dataset = FashionMNIST(root=download_root,
-                                    transform=my_transform,
-                                    train=True,
-                                    download=args.download)
-        eval_dataset = FashionMNIST(root=download_root,
-                                    transform=my_transform,
-                                    train=False,
-                                    download=args.download)
-        test_dataset = FashionMNIST(root=download_root,
-                                    transform=my_transform,
-                                    train=False,
-                                    download=args.download)
+    download_root = "./fashonmnist_dataset"
+    train_dataset = FashionMNIST(root=download_root,
+                                transform=my_transform,
+                                train=True,
+                                download=args.download)
+    eval_dataset = FashionMNIST(root=download_root,
+                                transform=my_transform,
+                                train=False,
+                                download=args.download)
+    test_dataset = FashionMNIST(root=download_root,
+                                transform=my_transform,
+                                train=False,
+                                download=args.download)
 
     return train_dataset, eval_dataset, test_dataset
 
@@ -79,7 +64,7 @@ def main():
         device = torch.device("cpu")
     
     # Get MNIST Dataset
-    train_dataset, eval_dataset, test_dataset = get_data(name="FASHION_MNIST")
+    train_dataset, eval_dataset, test_dataset = get_data()
 
     # Make DataLoader
     train_loader = DataLoader(train_dataset,
@@ -199,6 +184,9 @@ def main():
             
             # show result
             show_img(img.cpu().numpy(), str(out.item()))
+            
+            if i > 6:
+                break
             
 if __name__ == "__main__":
     args = parse_args()
