@@ -191,14 +191,3 @@ def main():
 if __name__ == "__main__":
     args = parse_args()
     main()
-    
-# image classification sequential
-# 1. Get dataset
-# 2. Make Dataloader(학습에 사용될 DB 구축)
-# 3. design model
-# 4. training
-# 5. optimizer & scheduler
-# 6. loss function
-# 7. forward -> loss_val
-# 8. loss_val -> backpropagation -> optimizer.step(), optimizer.zero_grad()
-# 9. save model
