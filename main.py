@@ -96,8 +96,8 @@ def main():
         model.train() # trian
         
         # optimizer & scheduler
-        optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9) #  weight_decay=0.1 -> error reason
-        scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
+        optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9) #  weight_decay=0.1 -> error reason
+        scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)
         
         criterion = get_criterion(crit='mnist', device=device)
         
