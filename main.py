@@ -1,4 +1,3 @@
-from turtle import down
 import argparse
 import sys, os
 import torch
@@ -50,7 +49,7 @@ def get_data(name = "MNIST"):
                             train=False,
                             download=args.download)
     elif name == "FASHION_MNIST":
-        download_root = "./fationmnist_dataset"
+        download_root = "./fashonmnist_dataset"
         train_dataset = FashionMNIST(root=download_root,
                                     transform=my_transform,
                                     train=True,
@@ -152,8 +151,7 @@ def main():
         
         
     elif args.mode == "eval":
-        # python main.py --mode "eval" --download 1 --output_dir ./output \ 
-        # --checkpoint ./output/model_epoch2.pt
+        # python main.py --mode "eval" --download 1 --output_dir ./output --checkpoint ./output/model_epoch4.pt
         model = _model(batch=1, n_classes=10, in_channel=1, in_width=32, in_height=32)
         # load trained model
         checkpoint = torch.load(args.checkpoint)
@@ -182,8 +180,7 @@ def main():
         print(f"Evaluation Score : {acc} / {num_eval}")
             
     elif args.mode == "test":
-        # python main.py --mode "test" --download 1 --output_dir ./output \
-        # --checkpoint ./output/model_epoch2.pt
+        # python main.py --mode "test" --download 1 --output_dir ./output --checkpoint ./output/model_epoch2.pt
         model = _model(batch=1, n_classes=10, in_channel=1, in_width=1, in_height=1)
         checkpoint = torch.load(args.checkpoint)
         model.load_state_dict(checkpoint)
