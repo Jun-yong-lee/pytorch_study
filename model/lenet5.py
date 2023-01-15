@@ -2,7 +2,6 @@ import torch
 import torch.nn as nn
 
 class Lenet5(nn.Module):
-    
     def __init__(self, batch, n_classes, in_channel, in_width, in_height, is_train=False):
         super().__init__()
         self.batch = batch
